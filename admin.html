@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="water-assets/logo.png" />
-    <link rel="stylesheet" href="flip.css" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="/water-assets/logo.png" />
+    <link rel="stylesheet" href="/water-assets/flip.css" />
+    <link rel="stylesheet" href="/water-assets/styles.css" />
     <title>Admin Panel</title>
     <style>
         body {
@@ -18,7 +18,7 @@
         }
 
         #editor {
-            height: 700px;
+            height: 60vh;
         }
 
         .container-fluid {
@@ -171,7 +171,7 @@
 
 
     loadPledges = () => {
-        fetch("https://api.jsonbin.io/b/5e2a232d50a7fe418c52a0e9/latest")
+        fetch("/water-assets/mockdata.json")
             .then(res => res.json())
             .then(data => pledges = data.reverse())
             .then(() => savedStateEditorData = pledges)
@@ -202,16 +202,16 @@
     }
 
     postToJsonBin = () => {
-        let req = new XMLHttpRequest();
+        // let req = new XMLHttpRequest();
 
-        req.onreadystatechange = () => {
-            if (req.readyState == XMLHttpRequest.DONE) {
-                // Pass
-            }
-        };
-        req.open("PUT", "https://api.jsonbin.io/b/5e2a232d50a7fe418c52a0e9", false);
-        req.setRequestHeader("Content-type", "application/json");
-        req.send(JSON.stringify(pledges.reverse()));
+        // req.onreadystatechange = () => {
+        //     if (req.readyState == XMLHttpRequest.DONE) {
+        //         // Pass
+        //     }
+        // };
+        // req.open("PUT", "https://api.jsonbin.io/b/5e2a232d50a7fe418c52a0e9", false);
+        // req.setRequestHeader("Content-type", "application/json");
+        // req.send(JSON.stringify(pledges.reverse()));
         insertColumns();
     }
 
@@ -239,12 +239,12 @@
 
     validateUser = () => {
         let auth = prompt("ENTER PASSWORD", "");
-        if (auth == "a123a123A") {
+        if (auth == "123") {
             loadPledges();
             return true;
         } else {
             window.alert("INVALID PASSWORD. REDIRECTING OUT.");
-            window.location = "https://save4thefuturenow.com";
+            window.location = "/";
         }
     }
 </script>

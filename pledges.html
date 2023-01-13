@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="water-assets/styles.css" />
-    <link rel="stylesheet" href="water-assets/flip.css" />
-    <link rel="stylesheet" href="water-assets/fullpage.min.css" />
-    <link rel="stylesheet" href="water-assets/loaders.min.css" />
-    <link rel="icon" type="image/png" href="water-assets/logo.png" />
+    <link rel="stylesheet" href="/water-assets/styles.css" />
+    <link rel="stylesheet" href="/water-assets/flip.css" />
+    <link rel="stylesheet" href="/water-assets/fullpage.min.css" />
+    <link rel="stylesheet" href="/water-assets/loaders.min.css" />
+    <link rel="icon" type="image/png" href="/water-assets/logo.png" />
     <title>#SmallHabitsBigChange</title>
     <style>
         ::-webkit-scrollbar {
@@ -163,8 +163,8 @@
     }
 
 
-    fetch("https://api.jsonbin.io/b/5e2a232d50a7fe418c52a0e9/latest")
-        // fetch("http://127.0.0.1:5500/mockdata.json")
+    // fetch("https://api.jsonbin.io/b/5e2a232d50a7fe418c52a0e9/latest")
+    fetch("/water-assets/mockdata.json")
         .then(res => res.json())
         .then(data => pledges = data.reverse().slice(0, 102))
         .then(() => insertColumns())
