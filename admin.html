@@ -1,105 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/water-assets/logo.png" />
-    <link rel="stylesheet" href="/water-assets/flip.css" />
-    <link rel="stylesheet" href="/water-assets/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/TeamWater/water-assets/logo.png" />
+    <link rel="stylesheet" href="/TeamWater/water-assets/flip.css" />
+    <link rel="stylesheet" href="/TeamWater/water-assets/styles.css" />
     <title>Admin Panel</title>
     <style>
-        body {
-            overflow: hidden;
+      body {
+        overflow: hidden;
+      }
+
+      #editor {
+        height: 60vh;
+      }
+
+      .container-fluid {
+        overflow: auto;
+        height: 100vh;
+      }
+
+      @media (max-width: 1024px) {
+        #editor {
+          height: 35vh;
         }
 
-        #editor {
-            height: 60vh;
+        .col-lg-3.col-md-10 {
+          height: 100vh;
         }
 
         .container-fluid {
-            overflow: auto;
-            height: 100vh;
+          height: 35vh;
         }
 
-        @media (max-width: 1024px) {
-            #editor {
-                height: 35vh;
-            }
-
-            .col-lg-3.col-md-10 {
-                height: 100vh;
-            }
-
-            .container-fluid {
-                height: 35vh;
-
-            }
-
-            @media(max-width: 768px) {}
+        @media (max-width: 768px) {
         }
+      }
 
-        ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            background-color: #F5F5F5;
-        }
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+        background-color: #f5f5f5;
+      }
 
-        ::-webkit-scrollbar {
-            width: 4px;
-            background-color: #F5F5F5;
-        }
+      ::-webkit-scrollbar {
+        width: 4px;
+        background-color: #f5f5f5;
+      }
 
-        ::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-            background-color: #555;
-        }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #555;
+      }
     </style>
+  </head>
 
-</head>
-
-<body onload="validateUser()">
-    <div id="mainBody" class="row no-gutters justify-content-lg-around justify-content-md-center p-3">
-        <div class="col-lg-3 col-md-4 col-sm-12">
-            <h1 class="text-center">Database Editor</h1>
-            <hr>
-            <textarea class="form-control" id="editor" onchange="updateData()"></textarea>
-            <div class="d-flex justify-content-around my-3">
-                <button class="btn btn-danger" style="width: 200px;" onclick="validateSubmit()" type="button">Save
-                    changes</button>
-                <button class="btn btn-warning" style="width: 200px;" onclick="resetFields()"
-                    type="button">Reset</button></div>
-
+  <body onload="validateUser()">
+    <div
+      id="mainBody"
+      class="row no-gutters justify-content-lg-around justify-content-md-center p-3"
+    >
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        <h1 class="text-center">Database Editor</h1>
+        <hr />
+        <textarea
+          class="form-control"
+          id="editor"
+          onchange="updateData()"
+        ></textarea>
+        <div class="d-flex justify-content-around my-3">
+          <button
+            class="btn btn-danger"
+            style="width: 200px"
+            onclick="validateSubmit()"
+            type="button"
+          >
+            Save changes
+          </button>
+          <button
+            class="btn btn-warning"
+            style="width: 200px"
+            onclick="resetFields()"
+            type="button"
+          >
+            Reset
+          </button>
         </div>
+      </div>
 
-        <div class="col-lg-8 col-md-7 col-sm-12">
-            <div class="container-fluid">
-                <div id="pledges-list" class="row no-gutters justify-content-md-start justify-content-sm-center">
-                </div>
-            </div>
+      <div class="col-lg-8 col-md-7 col-sm-12">
+        <div class="container-fluid">
+          <div
+            id="pledges-list"
+            class="row no-gutters justify-content-md-start justify-content-sm-center"
+          ></div>
         </div>
-
-
+      </div>
     </div>
-</body>
+  </body>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<script>
+  <script>
     const pledgeList = document.getElementById("pledges-list");
     const editor = document.getElementById("editor");
     let pledges = [];
@@ -108,31 +137,30 @@
     goToTopBtn = document.getElementById("goToTopBtn");
 
     const questions = [
-        "Taking shorter showers of about 5 minutes. [save 9litres of water per minute]",
-        "Switch off the shower tap while shampooing or soaping your body. [save 9 litres of water per minute]",
-        "Use a dish of water to clean your shaver. [save 6 litres of water per minute]",
-        "Use a mug while brushing your teeth. [save 50ml]",
-        "Use the half flush when there is only liquid waste. [save 3 litres]",
-        "Install thimbles or water- saving devices at taps with high flow rate. [get PUB's water saving kit!]",
-        "Use a filled sink or bucket of water to rinse your dirty dishes. [save 6 litres of water per minute]",
-        "Use the washing machine only with a full load. [save 53 litres to 94.6 litres per use]",
-        "Wash vegetables with a filled sink instead of a running tap. [save 6 litres of water per minute]",
-        "Don't thaw frozen food under running water. [save 6 litres of water per minute]",
-        "Water plants by using a watering can instead of a running hose. [save 22 litres of water per minute]",
-        "Reuse water used for washing dishes or washing rice to flush the toilet.",
-    ]
+      "Taking shorter showers of about 5 minutes. [save 9litres of water per minute]",
+      "Switch off the shower tap while shampooing or soaping your body. [save 9 litres of water per minute]",
+      "Use a dish of water to clean your shaver. [save 6 litres of water per minute]",
+      "Use a mug while brushing your teeth. [save 50ml]",
+      "Use the half flush when there is only liquid waste. [save 3 litres]",
+      "Install thimbles or water- saving devices at taps with high flow rate. [get PUB's water saving kit!]",
+      "Use a filled sink or bucket of water to rinse your dirty dishes. [save 6 litres of water per minute]",
+      "Use the washing machine only with a full load. [save 53 litres to 94.6 litres per use]",
+      "Wash vegetables with a filled sink instead of a running tap. [save 6 litres of water per minute]",
+      "Don't thaw frozen food under running water. [save 6 litres of water per minute]",
+      "Water plants by using a watering can instead of a running hose. [save 22 litres of water per minute]",
+      "Reuse water used for washing dishes or washing rice to flush the toilet.",
+    ];
 
     createIcon = (boolean, iconIndex) => {
-        if (!boolean) {
-            return "";
-        }
-        iconMeaning = questions[iconIndex - 1]
-        return `<span data-toggle="tooltip" data-placement="bottom" title="${iconMeaning}"><img src="water-assets/icons/question-${iconIndex}.png" class="card-icon" /></span>`;
-
-    }
+      if (!boolean) {
+        return "";
+      }
+      iconMeaning = questions[iconIndex - 1];
+      return `<span data-toggle="tooltip" data-placement="bottom" title="${iconMeaning}"><img src="/TeamWater/water-assets/icons/question-${iconIndex}.png" class="card-icon" /></span>`;
+    };
 
     createColumn = (name, date, commitments) => {
-        return (`
+      return `
             <div class="col-md-4">
                 <div class="flip-card m-2">
                     <div class="flip-card-inner">
@@ -162,91 +190,93 @@
                         </div>
                     </div>
                 </div>
-            </div>`)
+            </div>`;
     };
 
     insertColumns = () => {
-        pledges.map(pledge => (pledgeList.innerHTML += createColumn(pledge.pledgerName, pledge.date, pledge.commitments)));
-    }
-
+      pledges.map(
+        (pledge) =>
+          (pledgeList.innerHTML += createColumn(
+            pledge.pledgerName,
+            pledge.date,
+            pledge.commitments
+          ))
+      );
+    };
 
     loadPledges = () => {
-        fetch("/water-assets/mockdata.json")
-            .then(res => res.json())
-            .then(data => pledges = data.reverse())
-            .then(() => savedStateEditorData = pledges)
-            .then(() => editorData = pledges)
-            .then(() => editor.innerHTML = JSON.stringify(editorData, null, 4))
-            .then(() => insertColumns())
-    }
+      fetch("/TeamWater/water-assets/mockdata.json")
+        .then((res) => res.json())
+        .then((data) => (pledges = data.reverse()))
+        .then(() => (savedStateEditorData = pledges))
+        .then(() => (editorData = pledges))
+        .then(() => (editor.innerHTML = JSON.stringify(editorData, null, 4)))
+        .then(() => insertColumns());
+    };
 
     updateData = () => {
-        editorData = $('#editor').val();
+      editorData = $("#editor").val();
 
-        try {
-            pledges = JSON.parse(editorData);
-        }
-        catch {
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Data Entry',
-                text: 'Check your inputs again.',
-            })
-        }
+      try {
+        pledges = JSON.parse(editorData);
+      } catch {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid Data Entry",
+          text: "Check your inputs again.",
+        });
+      }
 
-        insertColumns();
-    }
+      insertColumns();
+    };
 
     resetFields = () => {
-        $('#editor').val(JSON.stringify(savedStateEditorData, null, 4))
-    }
+      $("#editor").val(JSON.stringify(savedStateEditorData, null, 4));
+    };
 
     postToJsonBin = () => {
-        // let req = new XMLHttpRequest();
+      // let req = new XMLHttpRequest();
 
-        // req.onreadystatechange = () => {
-        //     if (req.readyState == XMLHttpRequest.DONE) {
-        //         // Pass
-        //     }
-        // };
-        // req.open("PUT", "https://api.jsonbin.io/b/5e2a232d50a7fe418c52a0e9", false);
-        // req.setRequestHeader("Content-type", "application/json");
-        // req.send(JSON.stringify(pledges.reverse()));
-        insertColumns();
-    }
+      // req.onreadystatechange = () => {
+      //     if (req.readyState == XMLHttpRequest.DONE) {
+      //         // Pass
+      //     }
+      // };
+      // req.open("PUT", "https://api.jsonbin.io/b/5e2a232d50a7fe418c52a0e9", false);
+      // req.setRequestHeader("Content-type", "application/json");
+      // req.send(JSON.stringify(pledges.reverse()));
+      insertColumns();
+    };
 
     validateSubmit = () => {
-        Swal.fire({
-            title: 'Are you sure?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Send to database',
-            allowOutsideClick: false,
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire(
-                    'Confirmed',
-                    'Database has been updated',
-                    'success'
-                ).then(() => {
-                    postToJsonBin();
-                })
+      Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Send to database",
+        allowOutsideClick: false,
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire("Confirmed", "Database has been updated", "success").then(
+            () => {
+              postToJsonBin();
             }
-        })
-    }
+          );
+        }
+      });
+    };
 
     validateUser = () => {
-        let auth = prompt("ENTER PASSWORD", "");
-        if (auth == "123") {
-            loadPledges();
-            return true;
-        } else {
-            window.alert("INVALID PASSWORD. REDIRECTING OUT.");
-            window.location = "/";
-        }
-    }
-</script>
-
+      let auth = prompt("ENTER PASSWORD", "");
+      if (auth == "123") {
+        loadPledges();
+        return true;
+      } else {
+        window.alert("INVALID PASSWORD. REDIRECTING OUT.");
+        window.location = "/";
+      }
+    };
+  </script>
 </html>
